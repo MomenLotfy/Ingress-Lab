@@ -362,7 +362,40 @@ kubectl get pods -n ingress-nginx
 ```
 
 ---
+---
 
+## ❓ Lab Questions & Answers
+
+### 1) What is the name of the IngressClass?
+**Answer:** `nginx`
+
+### 2) Why are the backend Services ClusterIP and not NodePort?
+**Answer:**  
+Because the **Ingress Controller handles external access**, the backend services only need **internal cluster communication**, so `ClusterIP` is the best choice.
+
+### 3) ADDRESS from `kubectl get ingress`
+**Answer:**  
+Usually on Minikube it is:
+- `127.0.0.1`
+- or `localhost`
+
+> Use the exact value shown in your **ADDRESS** column.
+
+### 4) Why does one Ingress replace 2 NodePort Services?
+**Answer:**  
+Because a single **Ingress resource can route traffic to multiple services** using **paths or hostnames**, instead of exposing each service separately with its own `NodePort`.
+
+### 5) What response did `/random` return?
+**Answer:** `404 Not Found`
+
+Because `/random` does not match any defined rule in the Ingress.
+
+### 6) How many rules does the routing table show in `kubectl describe`?
+**Answer:** `3 rules`
+
+- `/`
+- `/api`
+- `/admin`
 ## Conclusion
 
 This lab demonstrates how **Kubernetes Ingress** can replace multiple external load balancers and simplify traffic management using a single controller with:
